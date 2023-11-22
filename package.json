@@ -1,0 +1,25 @@
+{
+	"name": "ws-app-chat",
+	"version": "1.0.0",
+	"main": "index.js",
+	"repository": "https://github.com/Alexid-ID/ws-app-chat.git",
+	"author": "XID <86798664+Alexid-ID@users.noreply.github.com>",
+	"license": "MIT",
+	"scripts": {
+		"start": "node index.js",
+		"dev": "nodemon index.js"
+	},
+	"dependencies": {
+		"bcryptjs": "^2.4.3",
+		"dotenv": "^16.3.1",
+		"ejs": "^3.1.9",
+		"express": "^4.18.2",
+		"express-session": "^1.17.3",
+		"mongoose": "^8.0.1",
+		"passport": "^0.6.0",
+		"passport-local": "^1.0.0"
+	},
+	"devDependencies": {
+		"nodemon": "^3.0.1"
+	}
+}
