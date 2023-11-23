@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 3000;
 
 const UserRoute = require("./routes/user.route");
 const GroupRoute = require("./routes/group.route");
-// const MessageRoute = require("./routes/message.route");
+const MessageRoute = require("./routes/message.route");
 const passport = require("./config/passport");
 
 // ------- Connect database -------
@@ -32,7 +32,7 @@ app.use(passport.session());
 // ------- Router -------
 app.use("/users", UserRoute);
 app.use("/groups", GroupRoute);
-// app.use("/messages", MessageRoute);
+app.use("/messages", MessageRoute);
 
 // ------- Listen -------
 app.listen(PORT, () => {
