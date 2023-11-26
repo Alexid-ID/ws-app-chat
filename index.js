@@ -27,14 +27,40 @@ app.use(
 		cookie: { secure: false },
 	})
 );
+
+
+
+
 app.use(passport.initialize());
 app.use(passport.session());
-// ------- Router -------
-app.use("/users", UserRoute);
-app.use("/groups", GroupRoute);
-app.use("/messages", MessageRoute);
 
-// ------- Listen -------
-app.listen(PORT, () => {
-	console.log(`Server is running on port ${PORT}.`);
+//TODO: chỉ cần đưa main route
+// Routes Init
+const route = require("./routes/index.js");
+route(app);
+// ------- Router -------
+// app.use("/users", UserRoute);
+// app.use("/groups", GroupRoute);
+// app.use("/messages", MessageRoute);
+
+
+
+//TODO: này là handle error middleware phát sinh 
+// tự động bằng express validator có thể tham khảo
+app.use(function (req, res, next) {
+	next(createError(404));
 });
+
+// error handler
+app.use(function (err, req, res, next) {
+	// set locals, only providing error in development
+	res.locals.message = err.message;
+	res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+	// render the error page
+	res.status(err.status || 500);
+	res.render('pages/error', { layout: false });
+});
+
+
+module.exports = app;
