@@ -101,7 +101,7 @@
 
 /*---------------- Chat Box ----------------*/
 #chatbox {
-    background: rgba(75, 75, 75, 0.7);
+    background: rgba(239, 233, 233, 0.7);
 }
 
 #chatbox .chatbox-header {
@@ -115,6 +115,11 @@
     gap: 0.8rem;
 }
 
+.chatbox-item {
+    text-align: justify;
+    gap: 1rem;
+}
+
 .chatbox-inputs {
     position: absolute;
     bottom: 0;
@@ -122,10 +127,67 @@
     height: 60px;
 }
 
+.left .chatbox-text{
+    background: #dce8ff;
+}
+
+.right .chatbox-text{
+    background: #4399ff;
+}
+
+.chatbox-content .chatbox-text {
+    max-width: 60%;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.chatbox-text p {
+    font-size: 14px;
+}
+
 @media screen and (max-width: 992px) {
     #account {
         width: fit-content;
-        max-width: 60px;
+        max-width: 80px;
         transition: all 0.4s ease-in-out;
+    }
+
+
+    .account-header,
+    .account-header .logo,
+    .account-header .logo a {
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .account-list h5 {
+        padding: 8px !important;
+        margin: 0;
+        font-size: 16px;
+    }
+
+    .account-header .buttons {
+        display: none;
+    }
+
+    .logo span {
+        display: none;
+    }
+
+    .list-info {
+        display: none;
+    }
+
+    .account-current .current-name,
+    .account-current .current-setting {
+        display: none;
+    }
+
+    .account-current {
+        justify-content: center !important;
+    }
+
+    .chatbox-content .chatbox-text {
+        max-width: 80%;
     }
 }

@@ -2,6 +2,7 @@ $(document).ready(function () {
     const socket = io();
     const buttonSend = $(".button-send");
     const chatInput = $("#chat-input");
+    const chatbody = $(".chatbox-body");
 
     buttonSend.click(() => {
         const chatMessage = chatInput.val();
@@ -9,12 +10,31 @@ $(document).ready(function () {
         setInputDefault();
     });
 
-    socket.on("user-chat", (data) => {
+    socket.on("message", (data) => {
         console.log(data);
+    //     append html
+        chatbody.append(outputMessage(data));
     });
 
     handleInput();
 });
+
+function outputMessage(message) {
+    const html =
+        `<div
+        class="chatbox-item right mb-2 d-flex align-items-end justify-content-end"
+    >
+        <div
+            class="chatbox-content d-flex justify-content-end"
+            style="width: 100%;"
+        >
+            <div class="chatbox-text">
+                <p class="m-0 p-0">${message}</p>
+            </div>
+        </div>
+    </div>`;
+    return html;
+}
 
 function handleInput() {
     const chatInput = $("#chat-input");
@@ -29,5 +49,6 @@ function handleInput() {
 function setInputDefault() {
     const chatInput = $("#chat-input");
     chatInput.val("");
-    chatInput.setAttribute("style", "height: 40px;overflow-y:hidden;");
+    chatInput.css("height", "40px");
+    chatInput.css("overflow-y", "hidden");
 }

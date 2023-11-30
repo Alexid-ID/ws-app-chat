@@ -34,24 +34,30 @@ app.use(passport.session());
 route(app);
 
 async function init() {
-	// ------- Mongodb connect -------
+	// -------------- Database --------------
 	await connect();
-	// ------- Socket.io -------
-	io.on("connection", (socket) => {
-		console.log("a user connected");
-		socket.on("on-chat", (data) => {
-			console.log(data);
-			io.emit("user-chat", data);
-		});
 
-		// Broadcast when a user connects
-		socket.broadcast.emit("user-connected", "A user has joined the chat");
-	});
-
-	// ------- Listen -------
+	// -------------- Server --------------
 	server.listen(PORT, () => {
 		console.log(`Server is running on port ${PORT}`);
 	});
 }
 
 init();
+
+// -------------- Socket --------------
+io.on("connection", (socket) => {
+	console.log("a user connected");
+	socket.on("on-chat", (data) => {
+		console.log(data);
+		io.emit("message", data);
+	});
+
+	// Broadcast when a user connects
+	// socket.broadcast.emit("message", "A user has joined the chat");
+
+	// Runs when client disconnects
+	// socket.on("disconnect", () => {
+	// 	io.emit("message", "A user has left the chat");
+	// });
+});
