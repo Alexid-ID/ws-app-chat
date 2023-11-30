@@ -8,12 +8,11 @@ const localStrategy = new LocalStrategy(async function (username, password, done
     if(!username || !password) {
         return done(null, false, { message: "Missing username or password" });
     }   
-    
 
     try {
         const user = await UserModel.findOne({ username });
         if(!user) {
-            return done(null, false, { message: "Username is incorrect" });
+            return done(null, false, { message: "Username is not exist" });
         }
 
         const isMatch = bcrypt.compareSync(password, user.password);

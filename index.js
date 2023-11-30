@@ -2,16 +2,15 @@ require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
 const app = express();
+const http = require("http");
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
+
 const PORT = process.env.PORT || 3000;
-
-const UserRoute = require("./routes/user.route");
-const GroupRoute = require("./routes/group.route");
-const MessageRoute = require("./routes/message.route");
 const passport = require("./config/passport");
-
-// ------- Connect database -------
-const db = require("./config/db");
-db.connect();
+const connect = require("./config/db");
+const route = require("./routes/main.route");
 
 // ------- Config -------
 app.use(express.static("public"));
@@ -28,39 +27,31 @@ app.use(
 	})
 );
 
-
-
-
 app.use(passport.initialize());
 app.use(passport.session());
 
-//TODO: chỉ cần đưa main route
-// Routes Init
-const route = require("./routes/index.js");
+// ------- Routes init -------
 route(app);
-// ------- Router -------
-// app.use("/users", UserRoute);
-// app.use("/groups", GroupRoute);
-// app.use("/messages", MessageRoute);
 
+async function init() {
+	// ------- Mongodb connect -------
+	await connect();
+	// ------- Socket.io -------
+	io.on("connection", (socket) => {
+		console.log("a user connected");
+		socket.on("on-chat", (data) => {
+			console.log(data);
+			io.emit("user-chat", data);
+		});
 
+		// Broadcast when a user connects
+		socket.broadcast.emit("user-connected", "A user has joined the chat");
+	});
 
-//TODO: này là handle error middleware phát sinh 
-// tự động bằng express validator có thể tham khảo
-app.use(function (req, res, next) {
-	next(createError(404));
-});
+	// ------- Listen -------
+	server.listen(PORT, () => {
+		console.log(`Server is running on port ${PORT}`);
+	});
+}
 
-// error handler
-app.use(function (err, req, res, next) {
-	// set locals, only providing error in development
-	res.locals.message = err.message;
-	res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-	// render the error page
-	res.status(err.status || 500);
-	res.render('pages/error', { layout: false });
-});
-
-
-module.exports = app;
+init();

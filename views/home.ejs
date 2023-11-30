@@ -1,202 +1,445 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-
-
-    <title>chat app</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
-    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="./js/chatapp.css">
+	<meta charset="utf-8" />
+	<title>chat app</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+			integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+			crossorigin="anonymous"
+	/>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css" />
+	<link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+	<link rel="stylesheet" href="/css/home.css" />
 </head>
 
 <body>
-    <div class="background-container"></div>
-    <div class="container">
-        <div class="row clearfix">
-            <div class="col-lg-12">
-                <div class="card chat-app">
-                    <div class="row">
-                        <div class="col col-4">
-                            <div class="list-content">
-                                <div id="plist" class="room-list">
-                                    <h3 id="room_block">Room</h3>
-                                    <ul class="list-unstyled chat-list mt-2 mb-0">
-                                        <li class="clearfix">
-                                            <i class="fa-solid fa-users"></i>
-                                            <div class="about">
-                                                <div class="name">Nodejs</div>
-                                                <div class="status"> 3 member </div>
-                                            </div>
-                                        </li>
-                                        <li class="clearfix">
-                                            <i class="fa-solid fa-users"></i>
-                                            <div class="about">
-                                                <div class="name">Mobile App</div>
-                                                <div class="status"> 2 member </div>
-                                            </div>
-                                        </li>
+<div class="container-fluid m-0 p-0">
+	<div class="row m-0 p-3" id="main">
+		<div class="col my-3 mx-0 p-0" id="account">
+			<div class="account-header d-flex justify-content-between align-items-center p-2">
+				<div class="logo">
+					<a class="navbar-brand d-flex align-items-center" href="#">
+						<img
+								src="/images/logo.png"
+								width="40"
+								height="40"
+								class="d-inline-block align-top"
+								alt=""
+						/>
+						<span class="ml-2">WSChat</span>
+					</a>
+				</div>
+				<div class="buttons">
+					<button
+							class="btn btn-primary"
+							id="add-user"
+							data-toggle="modal"
+							data-target="#add-user-modal"
+					>
+						<i class="fas fa-user-plus"></i>
+					</button>
+					<button
+							class="btn btn-primary"
+							id="create-group"
+							data-toggle="modal"
+							data-target="#create-group-modal"
+					>
+						<i class="fas fa-users"></i>
+					</button>
+				</div>
+			</div>
+			<div class="account-list list-scroll">
+				<h5 class="m-0 px-3">Groups</h5>
+				<div class="group-list account-list-item px-2">
+					<div class="list-item group-item my-1 px-2 py-2">
+						<div class="list-avatar">
+							<img
+									src="/images/avatars/ava-1.jpg"
+									alt=""
+									width="40"
+									height="40"
+									class="rounded-circle"
+							/>
+						</div>
+						<div class="list-info">
+							<h5 class="m-0">Group 1 Group 1 Group 1 Group 1 Group 1 Group 1</h5>
+							<p class="m-0">3 members</p>
+						</div>
+					</div>
+					<div class="list-item group-item my-1 px-2 py-2">
+						<div class="list-avatar">
+							<img
+									src="/images/avatars/ava-1.jpg"
+									alt=""
+									width="40"
+									height="40"
+									class="rounded-circle"
+							/>
+						</div>
+						<div class="list-info">
+							<h5 class="m-0">Group 1</h5>
+							<p class="m-0">3 members</p>
+						</div>
+					</div>
+					<div class="list-item group-item my-1 px-2 py-2">
+						<div class="list-avatar">
+							<img
+									src="/images/avatars/ava-1.jpg"
+									alt=""
+									width="40"
+									height="40"
+									class="rounded-circle"
+							/>
+						</div>
+						<div class="list-info">
+							<h5 class="m-0">Group 1</h5>
+							<p class="m-0">3 members</p>
+						</div>
+					</div>
+				</div>
+				<h5 class="m-0 px-3">Friends</h5>
+				<div class="people-list account-list-item px-2">
+					<div class="list-item people-item my-1 px-2 py-2">
+						<div class="list-avatar">
+							<img
+									src="/images/avatars/ava-1.jpg"
+									alt=""
+									width="40"
+									height="40"
+									class="rounded-circle"
+							/>
+						</div>
+						<div class="list-info">
+							<h5 class="m-0">John Doe</h5>
+							<p class="m-0">online</p>
+						</div>
+					</div>
+					<div class="list-item people-item my-1 px-2 py-2">
+						<div class="list-avatar">
+							<img
+									src="/images/avatars/ava-1.jpg"
+									alt=""
+									width="40"
+									height="40"
+									class="rounded-circle"
+							/>
+						</div>
+						<div class="list-info">
+							<h5 class="m-0">John Doe</h5>
+							<p class="m-0">online</p>
+						</div>
+					</div>
+					<div class="list-item people-item my-1 px-2 py-2">
+						<div class="list-avatar">
+							<img
+									src="/images/avatars/ava-1.jpg"
+									alt=""
+									width="40"
+									height="40"
+									class="rounded-circle"
+							/>
+						</div>
+						<div class="list-info">
+							<h5 class="m-0">John Doe</h5>
+							<p class="m-0">online</p>
+						</div>
+					</div>
+					<div class="list-item people-item my-1 px-2 py-2">
+						<div class="list-avatar">
+							<img
+									src="/images/avatars/ava-1.jpg"
+									alt=""
+									width="40"
+									height="40"
+									class="rounded-circle"
+							/>
+						</div>
+						<div class="list-info">
+							<h5 class="m-0">John Doe</h5>
+							<p class="m-0">online</p>
+						</div>
+					</div>
+					<div class="list-item people-item my-1 px-2 py-2">
+						<div class="list-avatar">
+							<img
+									src="/images/avatars/ava-1.jpg"
+									alt=""
+									width="40"
+									height="40"
+									class="rounded-circle"
+							/>
+						</div>
+						<div class="list-info">
+							<h5 class="m-0">John Doe</h5>
+							<p class="m-0">online</p>
+						</div>
+					</div>
+					<div class="list-item people-item my-1 px-2 py-2">
+						<div class="list-avatar">
+							<img
+									src="/images/avatars/ava-1.jpg"
+									alt=""
+									width="40"
+									height="40"
+									class="rounded-circle"
+							/>
+						</div>
+						<div class="list-info">
+							<h5 class="m-0">John Doe</h5>
+							<p class="m-0">online</p>
+						</div>
+					</div>
+					<div class="list-item people-item my-1 px-2 py-2">
+						<div class="list-avatar">
+							<img
+									src="/images/avatars/ava-1.jpg"
+									alt=""
+									width="40"
+									height="40"
+									class="rounded-circle"
+							/>
+						</div>
+						<div class="list-info">
+							<h5 class="m-0">John Doe</h5>
+							<p class="m-0">online</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="account-current p-2 d-flex justify-content-between align-items-center">
+				<div class="current-info d-flex align-items-center">
+					<div class="current-avatar">
+						<img
+								src="/images/avatars/ava-1.jpg"
+								alt=""
+								width="40"
+								height="40"
+								class="rounded-circle"
+						/>
+					</div>
+					<div class="current-name">
+						<h5 class="m-0">Nguyễn Văn A</h5>
+						<p class="m-0">online</p>
+					</div>
+				</div>
+				<div class="current-setting">
+					<button class="btn btn-primary" id="logout">
+						<i class="fas fa-sign-out-alt"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="col my-3 mx-0 p-0" id="chatbox">
+			<div class="chatbox-header d-flex justify-content-between align-items-center px-2">
+				<div class="current-contact list-info d-flex align-items-center">
+					<div class="current-avatar">
+						<img
+								src="/images/avatars/ava-1.jpg"
+								alt=""
+								width="40"
+								height="40"
+								class="rounded-circle"
+						/>
+					</div>
+					<div class="current-name">
+						<h5 class="m-0">Nguyễn Văn A</h5>
+						<p class="m-0">online</p>
+					</div>
+				</div>
+				<button class="btn btn-light chatbox-setting">
+					<i class="bx bx-dots-vertical-rounded"></i>
+				</button>
+			</div>
 
-                                    </ul>
-                                </div>
-                                <div id="plist" class="people-list">
-                                    <h3 id="people_block">People</h3>
-                                    <ul class="list-unstyled chat-list mt-2 mb-0">
-                                        <li class="clearfix">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar">
-                                            <div class="about">
-                                                <div class="name">Vincent Porter</div>
-                                                <div class="status"> <i class="fa fa-circle offline"></i> left 7 mins
-                                                    ago </div>
-                                            </div>
-                                        </li>
+			<div class="chatbox-body list-scroll d-flex flex-column px-3" style="width: 100%">
+				<div class="chatbox-item mb-2 d-flex align-items-end" style="text-align: justify; gap: 1rem">
+					<div class="chatbox-avatar">
+						<img
+								src="/images/avatars/ava-1.jpg"
+								alt=""
+								width="28"
+								height="28"
+								class="rounded-circle"
+						/>
+					</div>
+					<div class="chatbox-content">
+						<p class="user-name my-1 mx-0 p-0"><small>Nguyễn Văn A</small></p>
+						<div
+								class="chatbox-text"
+								style="
+										max-width: 60%;
+										background-color: #e2e2e2;
+										border-radius: 10px;
+										padding: 10px;
+									"
+						>
+							<p class="m-0 p-0">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, asperiores
+								consequatur cumque cupiditate doloribus ea earum enim eos error et eum excepturi
+								exercitationem explicabo fugiat hic id illum impedit ipsa ipsum iure laboriosam
+								laborum magnam maiores maxime molestiae natus nemo neque nihil nisi nobis
+								nostrum numquam odio officia officiis optio pariatur perferendis perspiciatis
+								placeat
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="chatbox-item mb-2 d-flex align-items-end" style="text-align: justify; gap: 1rem">
+					<div class="chatbox-avatar">
+						<img
+								src="/images/avatars/ava-1.jpg"
+								alt=""
+								width="28"
+								height="28"
+								class="rounded-circle"
+						/>
+					</div>
+					<div class="chatbox-content">
+						<p class="user-name my-1 mx-0 p-0">Nguyễn Văn A</p>
+						<div
+								class="chatbox-text"
+								style="
+										max-width: 60%;
+										background-color: #e2e2e2;
+										border-radius: 10px;
+										padding: 10px;
+									"
+						>
+							<p class="m-0 p-0">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, asperiores
+								consequatur cumque cupiditate doloribus ea earum enim eos error et eum excepturi
+								exercitationem explicabo fugiat hic id illum impedit ipsa ipsum iure laboriosam
+								laborum magnam maiores maxime molestiae natus nemo neque nihil nisi nobis
+								nostrum numquam odio officia officiis optio pariatur perferendis perspiciatis
+								placeat
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="chatbox-item mb-2 d-flex align-items-end" style="text-align: justify; gap: 1rem">
+					<div class="chatbox-avatar">
+						<img
+								src="/images/avatars/ava-1.jpg"
+								alt=""
+								width="28"
+								height="28"
+								class="rounded-circle"
+						/>
+					</div>
+					<div class="chatbox-content">
+						<p class="user-name my-1 mx-0 p-0">Nguyễn Văn A</p>
+						<div
+								class="chatbox-text"
+								style="
+										max-width: 60%;
+										background-color: #e2e2e2;
+										border-radius: 10px;
+										padding: 10px;
+									"
+						>
+							<p class="m-0 p-0">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, asperiores
+								consequatur cumque cupiditate doloribus ea earum enim eos error et eum excepturi
+								exercitationem explicabo fugiat hic id illum impedit ipsa ipsum iure laboriosam
+								laborum magnam maiores maxime molestiae natus nemo neque nihil nisi nobis
+								nostrum numquam odio officia officiis optio pariatur perferendis perspiciatis
+								placeat
+							</p>
+						</div>
+					</div>
+				</div>
 
-                                        <li class="clearfix active">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
-                                            <div class="about">
-                                                <div class="name">Aiden Chavez</div>
-                                                <div class="status"> <i class="fa fa-circle online"></i> online </div>
-                                            </div>
-                                        </li>
-                                        <li class="clearfix">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="avatar">
-                                            <div class="about">
-                                                <div class="name">Mike Thomas</div>
-                                                <div class="status"> <i class="fa fa-circle online"></i> online </div>
-                                            </div>
-                                        </li>
-                                        <!-- <li class="clearfix">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
-                                            <div class="about">
-                                                <div class="name">Christian Kelly</div>
-                                                <div class="status"> <i class="fa fa-circle offline"></i> left 10 hours ago </div>
-                                            </div>
-                                        </li>
-                                        <li class="clearfix">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar8.png" alt="avatar">
-                                            <div class="about">
-                                                <div class="name">Monica Ward</div>
-                                                <div class="status"> <i class="fa fa-circle online"></i> online </div>
-                                            </div>
-                                        </li>
-                                        <li class="clearfix">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="avatar">
-                                            <div class="about">
-                                                <div class="name">Dean Henry</div>
-                                                <div class="status"> <i class="fa fa-circle offline"></i> offline since Oct 28
-                                                </div>
-                                            </div>
-                                        </li> -->
-                                    </ul>
-                                </div>
-
-                            </div>
-                            <div class="curr_account">
-                                <div class="avatar">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar">
-                                </div>
-                                <div class="about">
-
-                                    <div class="name">Vincent Porter</div>
-                                    <div class="status"> <i class="fa fa-circle offline"></i> left 7 mins ago </div>
-                                </div>
-                                <div class="logout">
-
-                                    <i class="bx bx-log-out" id="log_out"></i>
-
-                                </div>
-                            </div>
-
-
-
-                        </div>
-                        <div class="col col-8">
-                            <div class="chat">
-                                <div class="chat-header clearfix">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-                                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png"
-                                                    alt="avatar">
-                                            </a>
-                                            <div class="chat-about">
-                                                <h6 class="m-b-0">Aiden Chavez</h6>
-                                                <small>Last seen: 2 hours ago</small>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="chat-history">
-                                    <ul class="m-b-0">
-                                        <li class="clearfix">
-                                            <div class="message-data text-right">
-                                                <span class="message-data-time">10:10 AM, Today</span>
-                                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                                                    alt="avatar">
-                                            </div>
-                                            <div class="message other-message float-right"> Hi Aiden, how are you? How
-                                                is the
-                                                project coming along? </div>
-                                        </li>
-                                        <li class="clearfix">
-                                            <div class="message-data">
-                                                <span class="message-data-time">10:12 AM, Today</span>
-                                            </div>
-                                            <div class="message my-message">Are we meeting today?</div>
-                                        </li>
-                                        <li class="clearfix">
-                                            <div class="message-data">
-                                                <span class="message-data-time">10:15 AM, Today</span>
-                                            </div>
-                                            <div class="message my-message">Project has been already finished and I have
-                                                results
-                                                to show you.</div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="chat-message clearfix">
-                                    <div class="input-group mb-0">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fa-solid fa-paperclip"></i></span>
-                                        </div>
-                                        <input type="text" class="form-control" placeholder="Enter text here...">
-                                        <div class="input-group-append">
-                                            <span class="input-group-text"><i class="fa-solid fa-paper-plane"></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-        </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-        </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
-
-    </script>
+				<div
+						class="chatbox-item mb-2 d-flex align-items-end justify-content-end"
+						style="text-align: justify; gap: 1rem"
+				>
+					<div
+							class="chatbox-content"
+							style="max-width: 60%; background-color: #e2e2e2; border-radius: 10px; padding: 10px"
+					>
+						<div class="chatbox-text">
+							<p class="m-0 p-0">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, asperiores
+								consequatur cumque cupiditate doloribus ea earum enim eos error et eum excepturi
+								exercitationem explicabo fugiat hic id illum impedit ipsa ipsum iure laboriosam
+								laborum magnam maiores maxime molestiae natus nemo neque nihil nisi nobis
+								nostrum numquam odio officia officiis optio pariatur perferendis perspiciatis
+								placeat
+							</p>
+						</div>
+					</div>
+				</div>
+				<div
+						class="chatbox-item mb-2 d-flex align-items-end justify-content-end"
+						style="text-align: justify; gap: 1rem"
+				>
+					<div
+							class="chatbox-content"
+							style="max-width: 60%; background-color: #e2e2e2; border-radius: 10px; padding: 10px"
+					>
+						<div class="chatbox-text">
+							<p class="m-0 p-0">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, asperiores
+								consequatur cumque cupiditate doloribus ea earum enim eos error et eum excepturi
+								exercitationem explicabo fugiat hic id illum impedit ipsa ipsum iure laboriosam
+								laborum magnam maiores maxime molestiae natus nemo neque nihil nisi nobis
+								nostrum numquam odio officia officiis optio pariatur perferendis perspiciatis
+								placeat
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="chatbox-inputs d-flex justify-content-between align-items-end px-2" style="gap: 1rem">
+				<!-- input file button -->
+				<div class="chatbox-attach">
+					<button class="btn btn-primary">
+						<i class="fas fa-paperclip"></i>
+						<input type="file" name="" id="" hidden />
+					</button>
+				</div>
+				<div class="chatbox-text" style="flex: 1">
+					<!--input text multiple, max line: 3, default line: 1, auto increase height-->
+					<textarea
+							name=""
+							id="chat-input"
+							cols="30"
+							rows="1"
+							class="form-control"
+							style="resize: none; max-height: 100px"
+					></textarea>
+				</div>
+				<div class="chatbox-send">
+					<button class="btn btn-primary button-send">
+						<i class="fas fa-paper-plane"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
-
+<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+		integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+		crossorigin="anonymous"
+		referrerpolicy="no-referrer"
+></script>
+<script
+		src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"
+></script>
+<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+		crossorigin="anonymous"
+></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/home.js"></script>
 </html>

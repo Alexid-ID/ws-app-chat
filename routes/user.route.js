@@ -14,16 +14,16 @@ router.post("/register", UserController.register);
 router.post("/login", (req, res, next) => {
 	passport.authenticate("local", function (err, user, info) {
 		if (err) {
-			return res.status(500).json({ message: err.message });
+			return res.status(500).json({ status: "error", message: err.message });
 		}
 		if (!user) {
-			return res.status(400).json({ message: info.message });
+			return res.status(400).json({ status: "success", message: info.message });
 		}
 		req.logIn(user, function (err) {
 			if (err) {
-				return res.status(500).json({ message: err.message });
+				return res.status(500).json({ status: "error", message: err.message });
 			}
-			return res.status(200).json({ message: "Login success", user });
+			return res.status(200).json({ status: "success", message: "Login success", user });
 		});
 	})(req, res, next);
 });

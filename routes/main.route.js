@@ -1,16 +1,30 @@
 //TODO:chia main quản lý tác vụ trước sau , các phụ thuộc endpoint dễ nhìn hơn
-const AccountRoute = require("./AccountRoute");
-const ProductRoute = require("./ProductRoute");
-const OrderRoute = require("./orderRoute");
-const connect = require("../config/db/index");
-const checkUser = require("../app/middleware/checkUser");
+const UserRoute = require("./user.route");
+const GroupRoute = require("./group.route");
+const MessageRoute = require("./message.route");
+const AuthRoute = require("./auth.route");
+const HomeRoute = require("./home.route");
+// const checkUser = require("../app/middleware/checkUser");
 
 const router = (app) => {
-  //connect Mongo
-  connect.connect();
-  app.use("/api/account",AccountRoute);
-  app.use("/api/products", ProductRoute);
-  app.use("/api/orders",checkUser, OrderRoute);
+	app.use("/api/users", UserRoute);
+	app.use("/api/groups", GroupRoute);
+	// app.use("/api/messages", checkUser, MessageRoute);
+	app.use("/api/messages", MessageRoute);
+
+	app.use("/", AuthRoute);
+	app.use("/", HomeRoute);
+
+	app.use((req, res, next) => {
+		if (!req.isAuthenticated()) {
+			res.redirect("/login");
+		}
+		next();
+	});
+
+	// app.use((req, res, next) => {
+	// 	res.status(404).send("404 Not Found");
+	// });
 };
 
 module.exports = router;

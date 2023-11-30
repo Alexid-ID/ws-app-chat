@@ -8,17 +8,22 @@ p.item {
     background-color: green;
 }
 
+body {
+    height: 100%;
+    min-height: 100vh;
+}
+
 body .container {
-    border: 2px solid red;
-    padding-top: 120px;
+    /*padding-top: 120px;*/
 }
 
 body .background-container {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    min-height: 100vh;
     background: url(/images/lightmodebg.jpg) no-repeat center center fixed;
     background-size: cover;
     transition: 0.5s ease;
@@ -27,14 +32,37 @@ body .background-container {
 
 #index {
     position: absolute;
-    width: 100%;    
+    width: 100%;
     z-index: 1;
-
-
-
-
-    /* height: 100vh;    */
-
 }
 
 /* mainpage */
+
+/* ------------------- Register ------------------- */
+.avatar-list {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: stretch;
+}
+
+.avatar-item {
+    /*margin: 8px;*/
+    cursor: pointer;
+}
+
+.avatar-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.avatar-item input {
+    display: none;
+}
+
+.avatar-item.active img {
+    outline: 3px solid green;
+    padding: 2px;
+}
