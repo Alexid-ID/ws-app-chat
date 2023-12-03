@@ -476,13 +476,15 @@ function renderGroupMessages(data) {
     }
 
     data.messages.forEach((message) => {
+        const time = new Date(message.createdAt).toLocaleDateString() + " " + new Date(message.createdAt).toLocaleTimeString();
         if (message.sender._id == currentUserId) {
             chatBody.append(
                 `<div class="chatbox-item right mb-2 d-flex align-items-end justify-content-end">
                     <div
-                        class="chatbox-content d-flex justify-content-end"
+                        class="chatbox-content d-flex flex-column align-items-end"
                         style="width: 100%;"
                     >
+                    <p class="my-1 mx-0 p-0"><small>${time}</small></p>
                         <div class="chatbox-text"><p class="m-0 p-0">${message.text}</p></div>
                     </div>
                 </div>`
@@ -500,7 +502,7 @@ function renderGroupMessages(data) {
                         />
                     </div>
                     <div class="chatbox-content">
-                        <p class="user-name my-1 mx-0 p-0"><small>${message.sender.name}</small> - <small>${message.createdAt}</small></p>
+                        <p class="user-name my-1 mx-0 p-0"><small>${message.sender.name}</small> - <small>${time}</small></p>
                         <div
                             class="chatbox-text"
                         ><p class="m-0 p-0">${message.text}</p></div>
