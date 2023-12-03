@@ -25,15 +25,31 @@ class GroupController {
 		try {
 			const message = new MessageModel();
 			await message.save();
-
-			const { name, avatar, members } = req.body;
+			let messages = message._id;
+			const { name, members } = req.body;
+			let avatar = null;
 
 			if (!name) return res.status(400).json({ message: "Name is required" });
 
-			let messages = message._id;
-			const newGroup = new GroupModel({ name, avatar, members, messages });
-			await newGroup.save();
-			return res.status(201).json({ message: "Create success" });
+			if(members.length === 2) {
+				const user1 = await UserModel.findById(members[0]);
+				const user2 = await UserModel.findById(members[1]);
+
+				if (!user1 || !user2) return res.status(404).json({message: "User not found"});
+
+				const newGroup = new GroupModel({ name, avatar, members, messages });
+				await newGroup.save();
+
+				await UserModel.findByIdAndUpdate(members[0], { $push: { friends: members[1] } });
+				await UserModel.findByIdAndUpdate(members[1], { $push: { friends: members[0] } });
+
+				return res.status(201).json({ message: "Create connect success", group: newGroup });
+			} else {
+				avatar = "/images/group-default.png";
+				const newGroup = new GroupModel({ name, avatar, members, messages });
+				await newGroup.save();
+				return res.status(201).json({ message: "Create group success", group: newGroup });
+			}
 		} catch (err) {
 			return res.status(500).json({ message: err.message });
 		}
@@ -83,7 +99,6 @@ class GroupController {
 			if (!group) return res.status(404).json({ message: "Group not found" });
 
 			group.members = group.members.filter((member) => member != userId);
-			user.groups = user.groups.filter((group) => group != groupId);
 
 			await group.save();
 			await user.save();

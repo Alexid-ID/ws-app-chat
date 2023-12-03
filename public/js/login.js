@@ -30,7 +30,7 @@ function handleLogin() {
             success: function(data) {
                 console.log(data);
                 if(data.status === 'success') {
-                    window.location.href = "/home";
+                    window.location.href = "/chat";
                 } else {
                     loginError.html(`<small>${data.message}</small>`);
                 }

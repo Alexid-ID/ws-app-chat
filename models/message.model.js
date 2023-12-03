@@ -4,10 +4,6 @@ const MessageSchema = new Schema(
 	{
 		data: [
 			{
-				// datetime: {
-				// 	type: Date,
-				// 	default: Date.now,
-				// },
 				sender: {
 					type: Schema.Types.ObjectId,
 					ref: "User",

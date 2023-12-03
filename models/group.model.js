@@ -7,8 +7,7 @@ const GroupSchema = new Schema({
 		require: true,
 	},
 	avatar: {
-		type: String,
-		default: "/images/group-default.png",
+		type: String
 	},
 	members: [
 		{

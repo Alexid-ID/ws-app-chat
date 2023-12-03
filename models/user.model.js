@@ -19,12 +19,6 @@ const UserSchema = new Schema(
 			type: String,
 			default: "/images/avatar-default.png",
 		},
-		groups: [
-			{
-				type: Schema.Types.ObjectId,
-				ref: "Group",
-			},
-		],
 		friends: [
 			{
 				type: Schema.Types.ObjectId,

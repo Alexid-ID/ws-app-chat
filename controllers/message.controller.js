@@ -30,6 +30,39 @@ class MessageController {
 			return res.status(500).json({ message: err.message });
 		}
 	}
+
+	async getGroupMessages(req, res) {
+		const { id } = req.params;
+		console.log(id);
+		const group = await GroupModel.findById(id);
+		if (!group) return res.status(404).json({ message: "Group not found" });
+		const messageId = group.messages;
+		const messages = await MessageModel.find({ _id: { $in: messageId } });
+
+		let returnMessages = [];
+		for (let i = 0; i < messages.length; i++) {
+			for (let j = 0; j < messages[i].data.length; j++) {
+				const message = messages[i].data[j];
+				const sender = await UserModel.findById(message.sender);
+				returnMessages.push({
+					sender: {
+						_id: sender._id,
+						name: sender.name,
+						avatar: sender.avatar,
+					},
+					text: message.chat.content,
+					type: message.chat.dataType,
+					createdAt: message.chat.datetime,
+				});
+			}
+		}
+
+		return res.status(200).json({
+			groupName: group.name,
+			groupId: group._id,
+			messages: returnMessages
+		});
+	}
 }
 
 module.exports = new MessageController();

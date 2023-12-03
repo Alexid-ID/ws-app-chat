@@ -23,17 +23,14 @@ router.post("/login", (req, res, next) => {
 			if (err) {
 				return res.status(500).json({ status: "error", message: err.message });
 			}
+			req.session.user = user;
+			req.session.save();
 			return res.status(200).json({ status: "success", message: "Login success", user });
 		});
 	})(req, res, next);
 });
 
-router.get("/test", (req, res) => {
-	res.status(200).json({
-		user: req.user,
-		isAuthenticated: req.isAuthenticated(),
-	});
-});
+router.get("/find/:username", UserController.find);
 
 router.get("/logout", function (req, res, next) {
 	req.logout(function (err) {

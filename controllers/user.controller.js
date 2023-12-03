@@ -47,6 +47,16 @@ class UserController {
 			return res.status(500).json({ message: err.message });
 		}
 	}
+
+	async find(req, res) {
+		try {
+			const { username } = req.params;
+			const users = await UserModel.find({username}).select("_id name username avatar");
+			return res.status(200).json({ message: "Find success", users });
+		} catch (err) {
+			return res.status(500).json({ message: err.message });
+		}
+	}
 }
 
 module.exports = new UserController();
