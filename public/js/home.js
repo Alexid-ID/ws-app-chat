@@ -183,8 +183,6 @@ function createGroup() {
             return;
         }
 
-
-
         $.ajax({
             url: `/api/groups/`,
             type: "POST",
@@ -292,6 +290,7 @@ function searchUser() {
     const inputName = addFriendForm.find("#name");
     const errorAddFriend = addFriendForm.find(".error-add-friend");
     const searchFriendResult = addFriendForm.find(".search-friend-result");
+    const currentUserName = $(".current-info").find("h5").text().trim();
 
     addFriendForm.submit(function (e) {
         e.preventDefault();
@@ -299,6 +298,9 @@ function searchUser() {
 
     inputName.keyup(function (e) {
         e.preventDefault();
+
+        errorAddFriend.html("");
+
         if (e.keyCode == 13) {
             e.preventDefault();
             const name = inputName.val().trim();
@@ -306,6 +308,12 @@ function searchUser() {
                 errorAddFriend.html(`<p class="text-danger">Name is required</p>`);
                 return;
             }
+
+            if (name == currentUserName) {
+                errorAddFriend.html(`<p class="text-danger">You can't add yourself</p>`);
+                return;
+            }
+
             $.ajax({
                 url: `/api/users/find/${name}`,
                 type: "GET",

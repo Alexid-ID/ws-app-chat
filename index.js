@@ -53,9 +53,6 @@ init();
 io.on("connection", (socket) => {
 	console.log("a user connected");
 	socket.on("on-chat", async (data) => {
-		console.log("on-chat");
-		console.log(data);
-
 		// save message to database
 		try {
 			const { groupId, messageId, sender, chat } = data;

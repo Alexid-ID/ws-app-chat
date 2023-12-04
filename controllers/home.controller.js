@@ -8,7 +8,6 @@ class HomeController {
         let returnFriends = [];
 
         if(user) {
-            console.log("user", user);
             groups = await GroupModel.find({ members: user._id }).select('_id name avatar members messages');
             groups = groups.filter(group => group.members.length > 2).map(group => {
                 return {
@@ -37,7 +36,6 @@ class HomeController {
                 }
             }
 
-            console.log("friends", returnFriends);
         }
 
         return res.render('home', { title: 'Home', user, groups, friends: returnFriends });
