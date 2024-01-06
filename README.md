@@ -14,12 +14,12 @@ or
 ```
 yarn run dev
 ```
-Runs the app in the development mode.
+Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ## Default account
 # Login: 
-Username: minhthuw\ 
+Username: minhthuw<br/>
 Password: 123456
 
 ## Contributor: 
