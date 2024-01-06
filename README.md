@@ -1,16 +1,26 @@
-# ws-app-chat
-# Chat
+# Web demo WebSocket - WSChat
 Real time chating simple demo
-Run by node js and web socket
-### Setting
+Run by nodejs and web socket
+
+## Setting
 ```
-npm install
+yarn install
 ```
-### Run
+## Run project: 
 ```
-npm start
+yarn start
 ```
 or
 ```
-node run dev
+yarn run dev
 ```
+Runs the app in the development mode.
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+## Default account
+# Login: 
+Username: minhthuw 
+Password: 123456
+
+## Contributor: 
+Đặng Thị Minh Thư
